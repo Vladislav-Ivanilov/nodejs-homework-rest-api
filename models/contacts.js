@@ -42,7 +42,7 @@ const addContact = async ({ name, email, phone }) => {
   return newContact;
 };
 
-const updateContact = async (contactId, { name, email, phone }) => {
+const updateContact = async (contactId, body) => {
   const contacts = await listContacts();
   const index = contacts.findIndex(({ id }) => id === contactId);
 
@@ -50,7 +50,7 @@ const updateContact = async (contactId, { name, email, phone }) => {
     return null;
   }
 
-  contacts[index] = { ...contacts[index], name, email, phone };
+  contacts[index] = { ...contacts[index], ...body };
   updateFile(contacts);
   return contacts[index];
 };
