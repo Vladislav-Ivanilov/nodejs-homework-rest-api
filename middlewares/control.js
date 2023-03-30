@@ -8,6 +8,4 @@ const control = (control) => {
   };
 };
 
-module.exports = {
-  control,
-};
+module.exports = { control };

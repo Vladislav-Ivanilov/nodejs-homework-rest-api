@@ -1,26 +1,28 @@
 const express = require("express");
-const { validation } = require("../../middlewares/validation");
-const { control } = require("../../middlewares/control");
+const { validation, control, verify } = require("../../middlewares");
 const {
   schema,
   schemaUpdate,
   updateFavoriteSchema,
 } = require("../../schemas/joiSchema");
+
 const {
-  getContactsList,
-  getContact,
-  deleteContact,
-  createContact,
-  changeContact,
-  updateStatus,
-} = require("../../controllers/index");
+  contacts: {
+    getContactsList,
+    getContact,
+    createContact,
+    deleteContact,
+    changeContact,
+    updateStatus,
+  },
+} = require("../../controllers");
 const router = express.Router();
 
-router.get("/", control(getContactsList));
+router.get("/", verify, control(getContactsList));
 
 router.get("/:contactId", control(getContact));
 
-router.post("/", validation(schema), control(createContact));
+router.post("/", verify, validation(schema), control(createContact));
 
 router.delete("/:contactId", control(deleteContact));
 
