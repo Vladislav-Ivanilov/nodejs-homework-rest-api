@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/register", validation(registerSchema), control(register));
 router.post("/login", validation(loginSchema), control(login));
-router.get("/login", verify, control(logout));
+router.get("/logout", verify, control(logout));
 
 module.exports = router;
