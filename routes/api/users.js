@@ -1,7 +1,7 @@
 const express = require("express");
 const { control, verify, upload } = require("../../middlewares/");
 const {
-  users: { getCurrent, updateAvatar },
+  users: { getCurrent, updateAvatar, verifyEmail, resendEmail },
 } = require("../../controllers/");
 
 const router = express.Router();
@@ -13,5 +13,7 @@ router.patch(
   upload.single("avatar"),
   control(updateAvatar)
 );
+router.get("/verify/:verificationToken", control(verifyEmail));
+router.post("/verify", control(resendEmail));
 
 module.exports = router;
